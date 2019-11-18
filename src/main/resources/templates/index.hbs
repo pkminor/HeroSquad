@@ -30,7 +30,7 @@
     <div class="p-2"><h3>Available Squads</h3></div>
     {{#if squads}}
         {{#each squads }}
-        <div class="card shadow-sm p-2 m-2  mt-5">
+        <div class="shadow-sm p-2 m-2  mt-5">
           <div class="card-header">{{name}} - {{max_size}}</div>
           <div class="card-body">{{cause}}</div>
           <div class="card-footer">{{hero}}</div>
@@ -49,7 +49,7 @@
    {{#if heroes}}
     {{#each heroes }}
     <div class="shadow-sm p-2 m-2  mt-5">
-      {{name}} - {{power}} - {[weakness}} - {{age}}
+      {{name}} - {{power}} - {{weakness}} - {{age}}
     </div>
     {{/each}}
     {{else}}
@@ -108,20 +108,25 @@
               <input type="text" name="cause" id="cause" class="form-control" placeholder="Squad cause...">
            </div>
 
-           <div class="input-group mb-2">
+            {{#if free_heroes}}
+            <div class="input-group mb-2">
               <div class="input-group-prepend">
                  <button class="btn btn-primary">Squad Hero</button>
               </div>
+              
               <select name="hero" id="hero" class="form-control">
-                  {{#if heroes}}
-                     {{#each heroes}}
-                        <option value="{{id}}">{{name}}</option>
-                     {{/each}}
-                  {{/if}}
+                  {{#each free_heroes}}
+                       <option value="{{id}}">{{name}}</option>
+                  {{/each}}
                </select>
-           </div>
+               </div>
 
-           <button type="submit" class="btn btn-success font-weight-bolder">Create Squad!</button>
+               <button type="submit" class="btn btn-success font-weight-bolder">Create Squad!</button>
+
+              {{else}}
+              <div class="shadow-sm p-2 text-white font-weight-bolder bg-info">No Available Heroes!</div>
+              {{/if}}
+              
         </form>
         </div>
 
