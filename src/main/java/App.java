@@ -2,6 +2,7 @@ import models.Hero;
 import models.Squad;
 import spark.ModelAndView;
 import spark.Request;
+import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.ArrayList;
