@@ -60,6 +60,10 @@ public class Hero {
         this.setWeakness(weakness);
     }
 
+    public static Hero findById(int id){
+        return instances.get(id-1);
+    }
+
     public static List<Hero> getInstances() {
         return instances;
     }
