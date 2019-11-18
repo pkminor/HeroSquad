@@ -19,17 +19,14 @@ public class App {
 
         //GET : home:
         get("/",(req,res)->home(req), new HandlebarsTemplateEngine());
-
         //POST : new hero
         post("hero/new", (req,res)->newHero(req), new HandlebarsTemplateEngine());
-
         //POST : new squad
         post("squad/new", (req,res)->newSquad(req), new HandlebarsTemplateEngine());
     }
 
-
     private static ModelAndView home(Request request){
-
+        //the dao/model should handle all data querying
         //List<Hero> all_heroes = request.session().attribute("heroes");
         //List<Hero> engaged_heroes = Squad.getAllHeroes();
        List<Hero> free_heroes = Squad.getFreeHeroes();
@@ -57,7 +54,7 @@ public class App {
 
         request.session().attribute("heroes", Hero.getInstances());
 
-        //the dao/model should handle all data querying
+
         //List<Hero> all_heroes = request.session().attribute("heroes");
         //List<Hero> engaged_heroes = Squad.getAllHeroes();
         List<Hero> free_heroes =Squad.getFreeHeroes();
@@ -86,7 +83,7 @@ public class App {
 
         request.session().attribute("squads", Squad.getInstances());
 
-        List<Hero> all_heroes = request.session().attribute("heroes");
+        //List<Hero> all_heroes = request.session().attribute("heroes");
         //List<Hero> engaged_heroes = Squad.getAllHeroes();
         List<Hero> free_heroes = Squad.getFreeHeroes();
         /* engaged_heroes.size() <1 ? all_heroes:
