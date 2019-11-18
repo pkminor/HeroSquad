@@ -54,6 +54,16 @@ public class HeroTest {
     }
 
     @Test
+    public void findByIdReturnsCorrectHero_true(){
+        Hero h = setUpHero();
+        Hero h2= setUpHero();
+
+        Hero found  = Hero.findById(h.getId());
+
+        assertEquals(h,found);
+    }
+
+    @Test
     public void getAllReturnsAll(){
         Hero h = setUpHero();
         Hero h2 = setUpHero();
