@@ -3,32 +3,130 @@
 <head>
    <title>{{#block "title"}}Jot Down{{/block}}</title>
    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
    <style>
    .filters {width:20%;position:fixed;top:0;left:0;height:100%;overflow:auto;background-color: aliceblue;}
    .forms {width:20%;position:fixed;top:0;right:0;height:100%;overflow:auto;background-color: antiquewhite;}
    .content {width:60%;margin:auto;}
    body {user-select:none;font-family: "Trebuchet MS", Helvetica, sans-serif;}
+   input[type="text"]{border:0px}
+   input[type="number"]{border:0px}
    </style>
 </head>
 <body>
  <div class="filters p-1 pt-3">
-    <ul>
+    <div class="mt-5">
+       <ul>
        <li>Jenkins</li>
     </ul>
- </div>
-
- <div class="content shadow-sm p-3">
-  <div class="">
-    <div class="">
-      View Pane
     </div>
-  </div>
  </div>
 
-  <div class="forms p-1 pt-3">
-     <ul>
-       <li>Create Heroes or Create Squads</li>
-    </ul>
+ <div class="content">
+    <div class="shadow-sm p-3 sticky-top font-weight-bolder bg-success text-white">
+      HeroSquad
+    </div>
+
+    <div class="p-2"><h3>Available Squads</h3></div>
+    {{#if squads}}
+        {{#each squads }}
+        <div class="card shadow-sm p-2 m-2  mt-5">
+          <div class="card-header">{{name}} - {{max_size}}</div>
+          <div class="card-body">{{cause}}</div>
+          <div class="card-footer">{{hero}}</div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="shadow-sm p-2 m-2  mt-5">
+              No Squads to display yet. Add a few on the right.
+        </div>
+        {{/if}}
+
+
+    <hr class="my-3">
+
+    <div class="p-2"><h3>Available Heroes</h3></div>
+   {{#if heroes}}
+    {{#each heroes }}
+    <div class="shadow-sm p-2 m-2  mt-5">
+      {{name}} - {{power}} - {[weakness}} - {{age}}
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="shadow-sm p-2 m-2  mt-5">
+          No Heroes to display yet. Add a few on the right.
+    </div>
+    {{/if}}
+
+
+ </div>
+
+  <div class="forms p-3">
+     <div class="mt-5">
+
+        <div class="shadow-sm p-2">
+        <form action="/hero/new" method="post">
+           <div class="form-group mb-2">
+              <input type="text" name="name" id="name" class="form-control" placeholder="Hero name...">
+           </div>
+
+           <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                 <button class="btn btn-primary">Hero Age </button>
+              </div>
+              <input type="number" name="age" id="age" min="1" class="form-control" value=10>
+           </div>
+
+           <div class="form-group mb-2">
+              <input type="text" name="power" id="power" class="form-control" placeholder="Hero power...">
+           </div>
+
+           <div class="form-group mb-2">
+              <input type="text" name="weakness" id="weakness" class="form-control" placeholder="Hero weakness...">
+           </div>
+
+           <button type="submit" class="btn btn-success font-weight-bolder">Add Hero!</button>
+        </form>
+        </div>
+
+        <hr class="my-2">
+
+        <div class="shadow-sm p-2">
+        <form action="/squad/new" method="post" >
+           <div class="form-group mb-2">
+              <input type="text" name="name" id="name" class="form-control" placeholder="Squad name...">
+           </div>
+
+           <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                 <button class="btn btn-primary">Max Size </button>
+              </div>
+              <input type="number" name="size" id="size" min="1" class="form-control" value=10>
+           </div>
+
+           <div class="form-group mb-2">
+              <input type="text" name="cause" id="cause" class="form-control" placeholder="Squad cause...">
+           </div>
+
+           <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                 <button class="btn btn-primary">Squad Hero</button>
+              </div>
+              <select name="hero" id="hero" class="form-control">
+                  {{#if heroes}}
+                     {{#each heroes}}
+                        <option value="{{id}}">{{name}}</option>
+                     {{/each}}
+                  {{/if}}
+               </select>
+           </div>
+
+           <button type="submit" class="btn btn-success font-weight-bolder">Create Squad!</button>
+        </form>
+        </div>
+
+
+     </div>
    </div>
 </body>
 </html>
