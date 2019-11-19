@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Squad {
 
@@ -71,6 +72,17 @@ public class Squad {
 
     public static void clearAll() {
         instances.clear();
+    }
+
+    public static List<Hero> getAllHeroes(){
+        return instances.stream().map(sqd->Hero.findById(sqd.getHero().getId())).collect(Collectors.toList());
+    }
+
+    public static List<Hero> getFreeHeroes(){
+        List<Hero> engaged_heroes = Squad.getAllHeroes();
+        return Hero.getInstances().stream()
+                .filter(hr-> engaged_heroes.contains(hr) == false)
+                .collect(Collectors.toList());
     }
 
     @Override

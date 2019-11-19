@@ -87,4 +87,15 @@ public class Hero {
     public int hashCode() {
         return Objects.hash(id, name, age, power, weakness);
     }
+
+    @Override
+    public String toString() {
+        return "Hero{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", power='" + power + '\'' +
+                ", weakness='" + weakness + '\'' +
+                '}';
+    }
 }
